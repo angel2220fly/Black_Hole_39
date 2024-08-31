@@ -517,11 +517,7 @@ class compression:
 
                                             Find = 2
 
-                                    elif (
-                                        len(TUPLE) + 8 + 13 + 8 + len(C1)
-                                        < long_11 * 8
-                                        and len(C1) != 0
-                                    ):
+                                    elif (len(TUPLE)< long_11 * 8):
 
                                         input_string += (
                                             "En="
