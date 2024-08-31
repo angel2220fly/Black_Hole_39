@@ -23,7 +23,11 @@ class compression:
                 with open(name + ".b", "wb") as f2:
                     f2.write(
                         binascii.unhexlify(
-                            ("%0" + str((len(File_information5_17) // 8) * 2) + "x")
+                            (
+                                "%0"
+                                + str((len(File_information5_17) // 8) * 2)
+                                + "x"
+                            )
                             % int(File_information5_17, 2)
                         )
                     )
@@ -38,20 +42,16 @@ class compression:
                     f2.write(binascii.unhexlify(width_bits))
                     return str(time() - x)
 
-
-
-
         def Count_adds(En, Row1, Row):
 
             Row += 1
-           
 
             if Row == (8192 * 4) - 1:
                 Row = 0
 
             if En == (8192 * 4) - 1:
                 En = 255
-            En+=1
+            En += 1
 
             return En, Row1, Row
 
@@ -67,13 +67,17 @@ class compression:
 
             # Convert the extracted strings to tuples of integers
 
-            longl_F_values = [(int(en), int(longl_f)) for en, longl_f in matches]
+            longl_F_values = [
+                (int(en), int(longl_f)) for en, longl_f in matches
+            ]
 
             if longl_F_values:
 
                 # Find the smallest 'Longl_F' value and its corresponding variables
 
-                smallest_longl_F_values = min(longl_F_values, key=lambda x: x[1])
+                smallest_longl_F_values = min(
+                    longl_F_values, key=lambda x: x[1]
+                )
 
                 return smallest_longl_F_values
 
@@ -318,12 +322,12 @@ class compression:
                                 if Circle_times == 0:
 
                                     SINFO = INFO
-                                if I8[long_F-8]!="00000000":
-                                    I8+="00000000"
+                                if I8[long_F - 8] != "00000000":
+                                    I8 += "00000000"
                                 else:
-                                	I8+="11111111"
+                                    I8 += "11111111"
 
-                                while block < long_F+8:
+                                while block < long_F + 8:
 
                                     IF = I8[block : block + 8]
 
@@ -365,7 +369,7 @@ class compression:
 
                                                 W1 = block - 16
 
-                                                Sw1 = format(W//8, '01b')
+                                                Sw1 = format(W // 8, '01b')
 
                                                 Sw3 = format(len(Sw1), '05b')
 
@@ -375,7 +379,14 @@ class compression:
 
                                                 Sw4 = format(len(Sw2), '05b')
 
-                                                W3 += "0" + IF1 + Sw3 + Sw1 + Sw4 + Sw2
+                                                W3 += (
+                                                    "0"
+                                                    + IF1
+                                                    + Sw3
+                                                    + Sw1
+                                                    + Sw4
+                                                    + Sw2
+                                                )
 
                                                 W4 = W4[:W] + W4[W1:]
 
@@ -393,10 +404,9 @@ class compression:
 
                                 INFO = W4
                                 long_F = len(INFO)
-                                INFO=INFO[:long_F-8]
-                                
+                                INFO = INFO[: long_F - 8]
 
-                                #print(len(INFO))
+                                # print(len(INFO))
 
                                 while Find != 1:
 
@@ -413,7 +423,6 @@ class compression:
                                     FC = 0
 
                                     IF1 = ""
-                                    
 
                                     while block < long_F:
 
@@ -429,8 +438,11 @@ class compression:
 
                                         # print(C1)
 
-                                        if (C3 >= 6 and En <= (2 ** (C3 - 4) - 1)) or INFO_A[:3] in {"011", "010"}:
-    
+                                        if (
+                                            C3 >= 6
+                                            and En <= (2 ** (C3 - 4) - 1)
+                                        ) or INFO_A[:3] in {"011", "010"}:
+
                                             # print(C3)
 
                                             Counts = int(INFO_A, 2)
@@ -439,7 +451,9 @@ class compression:
 
                                             C4 = En - len(C)
 
-                                            bit_width = math.ceil(math.log2(En + 1))
+                                            bit_width = math.ceil(
+                                                math.log2(En + 1)
+                                            )
 
                                             C1 = format(C4, f'0{bit_width}b')
 
@@ -488,19 +502,24 @@ class compression:
                                     elif Row == (8192 * 4) - 3 and Find == 3:
 
                                         smallest_longl_F_values = (
-                                            find_smallest_longl_F_values(input_string)
+                                            find_smallest_longl_F_values(
+                                                input_string
+                                            )
                                         )
 
                                         if smallest_longl_F_values:
 
-                                            en, longl_F = smallest_longl_F_values
+                                            en, longl_F = (
+                                                smallest_longl_F_values
+                                            )
 
                                             En = int(en)
 
                                             Find = 2
 
                                     elif (
-                                        len(TUPLE) + 8 + 13 + 8 + len(C1) < long_11 * 8
+                                        len(TUPLE) + 8 + 13 + 8 + len(C1)
+                                        < long_11 * 8
                                         and len(C1) != 0
                                     ):
 
@@ -523,7 +542,9 @@ class compression:
 
                                             if smallest_longl_F_values:
 
-                                                en, longl_F = smallest_longl_F_values
+                                                en, longl_F = (
+                                                    smallest_longl_F_values
+                                                )
 
                                                 input_string = (
                                                     "En="
@@ -538,14 +559,18 @@ class compression:
 
                                         Find = 3
 
-                                        En, Row1, Row = Count_adds(En, Row1, Row)
+                                        En, Row1, Row = Count_adds(
+                                            En, Row1, Row
+                                        )
 
                                         # print(En)
 
                                         # print(len(TUPLE))
 
                                     else:
-                                            En, Row1, Row = Count_adds(En, Row1, Row)
+                                        En, Row1, Row = Count_adds(
+                                            En, Row1, Row
+                                        )
 
                                 if Ci == 1:
 
@@ -583,7 +608,10 @@ class compression:
 
                                         Extract1 = 0
 
-                                        if len(TUPLE) <= long_11 or Circle_times == 255:
+                                        if (
+                                            len(TUPLE) <= long_11
+                                            or Circle_times == 255
+                                        ):
 
                                             long_11 = len(TUPLE)
 
@@ -603,7 +631,9 @@ class compression:
 
                                         if N3 == 2:
 
-                                            SCircle_times = format(Circle_times2, '08b')
+                                            SCircle_times = format(
+                                                Circle_times2, '08b'
+                                            )
 
                                             if Circle_times == 1:
 
@@ -621,7 +651,9 @@ class compression:
 
                                             if N4 == 2:
 
-                                                long_1 = len(File_information5_17)
+                                                long_1 = len(
+                                                    File_information5_17
+                                                )
 
                                                 add_bits = ""
 
@@ -633,12 +665,15 @@ class compression:
 
                                                     while z < count_bits:
 
-                                                        add_bits = "0" + add_bits
+                                                        add_bits = (
+                                                            "0" + add_bits
+                                                        )
 
                                                         z = z + 1
 
                                                 File_information5_17 = (
-                                                    add_bits + File_information5_17
+                                                    add_bits
+                                                    + File_information5_17
                                                 )
 
                                                 N4 = 3
@@ -649,7 +684,9 @@ class compression:
                                                         File_information5_17
                                                     )
 
-                                                    Check2 = File_information5_17
+                                                    Check2 = (
+                                                        File_information5_17
+                                                    )
 
                                                     N5 == 1
 
@@ -657,7 +694,9 @@ class compression:
 
                                                         Ex = "00000000" + Check
 
-                                                        File_information5_17 = Ex
+                                                        File_information5_17 = (
+                                                            Ex
+                                                        )
 
                                                         elapsed_time = process_file1(
                                                             Extract1=1,
@@ -674,12 +713,21 @@ class compression:
 
                                                     if Circle_times3 == 0:
 
-                                                        long_16 = len(File_information5)
+                                                        long_16 = len(
+                                                            File_information5
+                                                        )
 
-                                                        if File_information5[:1] == "0":
+                                                        if (
+                                                            File_information5[
+                                                                :1
+                                                            ]
+                                                            == "0"
+                                                        ):
 
                                                             while (
-                                                                File_information5[:1]
+                                                                File_information5[
+                                                                    :1
+                                                                ]
                                                                 != "1"
                                                             ):
 
@@ -694,17 +742,24 @@ class compression:
                                                                         1:
                                                                     ]
 
-                                                        if File_information5[:1] == "1":
+                                                        if (
+                                                            File_information5[
+                                                                :1
+                                                            ]
+                                                            == "1"
+                                                        ):
 
-                                                            File_information5 = (
-                                                                File_information5[1:]
-                                                            )
+                                                            File_information5 = File_information5[
+                                                                1:
+                                                            ]
 
                                                     INFO = File_information5
 
                                                     if Circle_times3 == 0:
 
-                                                        Circle_times4 = int(INFO[:8], 2)
+                                                        Circle_times4 = int(
+                                                            INFO[:8], 2
+                                                        )
 
                                                         # print(Circle_times4)
 
@@ -724,7 +779,9 @@ class compression:
 
                                                             if En <= (2**i) - 1:
 
-                                                                longl = int(INFO[:i], 2)
+                                                                longl = int(
+                                                                    INFO[:i], 2
+                                                                )
 
                                                                 INFO = INFO[i:]
 
@@ -750,9 +807,14 @@ class compression:
 
                                                             C10 = 0
 
-                                                            Block_Check_Add = block
+                                                            Block_Check_Add = (
+                                                                block
+                                                            )
 
-                                                            O = INFO[block : block + 3]
+                                                            O = INFO[
+                                                                block : block
+                                                                + 3
+                                                            ]
 
                                                             if O == "010":
 
@@ -790,15 +852,24 @@ class compression:
 
                                                                 Row1 = (
                                                                     "0"
-                                                                    + str(En - 2)
+                                                                    + str(
+                                                                        En - 2
+                                                                    )
                                                                     + "b"
                                                                 )
 
-                                                                ZEROS_ONES = format(
-                                                                    E, Row1
+                                                                ZEROS_ONES = (
+                                                                    format(
+                                                                        E, Row1
+                                                                    )
                                                                 )
 
-                                                                if len(ZEROS_ONES) == 0:
+                                                                if (
+                                                                    len(
+                                                                        ZEROS_ONES
+                                                                    )
+                                                                    == 0
+                                                                ):
 
                                                                     File_information5_17 = (
                                                                         "00000000"
@@ -817,11 +888,13 @@ class compression:
                                                                     return elapsed_time
 
                                                                 ZEROS_ONES = (
-                                                                    "01" + ZEROS_ONES
+                                                                    "01"
+                                                                    + ZEROS_ONES
                                                                 )
 
                                                                 ZEROS_ONE_1 = (
-                                                                    "01" + ZEROS_ONE_1
+                                                                    "01"
+                                                                    + ZEROS_ONE_1
                                                                 )
 
                                                                 block += En - 2
@@ -832,7 +905,13 @@ class compression:
 
                                                                 C10 = 1
 
-                                                                if En <= (8192 * 4) - 1:
+                                                                if (
+                                                                    En
+                                                                    <= (
+                                                                        8192 * 4
+                                                                    )
+                                                                    - 1
+                                                                ):
 
                                                                     OCl = INFO[
                                                                         block : block
@@ -856,23 +935,30 @@ class compression:
                                                                 S = len(EB)
 
                                                                 block += (
-                                                                    En - SiZeros_ones
+                                                                    En
+                                                                    - SiZeros_ones
                                                                 )
 
                                                                 Row1 = (
-                                                                    "0" + str(En) + "b"
+                                                                    "0"
+                                                                    + str(En)
+                                                                    + "b"
                                                                 )
 
                                                                 if S > 0:
 
-                                                                    E = int(EB, 2)
+                                                                    E = int(
+                                                                        EB, 2
+                                                                    )
 
                                                                 else:
 
                                                                     E = 0
 
-                                                                ZEROS_ONES = format(
-                                                                    E, Row1
+                                                                ZEROS_ONES = (
+                                                                    format(
+                                                                        E, Row1
+                                                                    )
                                                                 )
 
                                                                 C = (
@@ -881,18 +967,21 @@ class compression:
                                                                     + "b"
                                                                 )
 
-                                                                ZEROS_ONES = format(
-                                                                    E, Row1
+                                                                ZEROS_ONES = (
+                                                                    format(
+                                                                        E, Row1
+                                                                    )
                                                                 )
 
-                                                                ZEROS_ONE_1 = format(
-                                                                    E, C
+                                                                ZEROS_ONE_1 = (
+                                                                    format(E, C)
                                                                 )
 
                                                             else:
 
                                                                 EB = INFO[
-                                                                    block : block + En
+                                                                    block : block
+                                                                    + En
                                                                 ]
 
                                                                 C10 = 1
@@ -900,13 +989,17 @@ class compression:
                                                                 block += En
 
                                                                 Row1 = (
-                                                                    "0" + str(En) + "b"
+                                                                    "0"
+                                                                    + str(En)
+                                                                    + "b"
                                                                 )
 
                                                                 E = int(EB, 2)
 
-                                                                ZEROS_ONES = format(
-                                                                    E, Row1
+                                                                ZEROS_ONES = (
+                                                                    format(
+                                                                        E, Row1
+                                                                    )
                                                                 )
 
                                                                 C = (
@@ -915,12 +1008,14 @@ class compression:
                                                                     + "b"
                                                                 )
 
-                                                                ZEROS_ONES = format(
-                                                                    E, Row1
+                                                                ZEROS_ONES = (
+                                                                    format(
+                                                                        E, Row1
+                                                                    )
                                                                 )
 
-                                                                ZEROS_ONE_1 = format(
-                                                                    E, C
+                                                                ZEROS_ONE_1 = (
+                                                                    format(E, C)
                                                                 )
 
                                                             Z2 = ZEROS_ONES
@@ -947,20 +1042,28 @@ class compression:
 
                                                         if (
                                                             C9 == 0
-                                                            and (long_L - En) >= 0
+                                                            and (long_L - En)
+                                                            >= 0
                                                         ):
 
-                                                            TUPLE = TUPLE[: long_L - En]
+                                                            TUPLE = TUPLE[
+                                                                : long_L - En
+                                                            ]
 
                                                             TUPLE += ZEROS_ONE_1
 
                                                         elif (
                                                             C9 == 1
-                                                            and (long_L -(En-2)) >= 0
+                                                            and (
+                                                                long_L
+                                                                - (En - 2)
+                                                            )
+                                                            >= 0
                                                         ):
 
                                                             TUPLE = TUPLE[
-                                                                : long_L - (En-2)
+                                                                : long_L
+                                                                - (En - 2)
                                                             ]
 
                                                             TUPLE += ZEROS_ONE_1
@@ -993,7 +1096,10 @@ class compression:
 
                                                             if N3 == 1:
 
-                                                                E = Z[block : block + 1]
+                                                                E = Z[
+                                                                    block : block
+                                                                    + 1
+                                                                ]
 
                                                                 if E == "0":
 
@@ -1025,7 +1131,10 @@ class compression:
                                                                         + E3
                                                                     ]
 
-                                                                    if len(S5) == 0:
+                                                                    if (
+                                                                        len(S5)
+                                                                        == 0
+                                                                    ):
 
                                                                         File_information5_17 = (
                                                                             "00000000"
@@ -1041,9 +1150,7 @@ class compression:
                                                                             x=x,
                                                                         )
 
-                                                                        return (
-                                                                            elapsed_time
-                                                                        )
+                                                                        return elapsed_time
 
                                                                     E1 = int(
                                                                         Z[
@@ -1073,13 +1180,18 @@ class compression:
                                                                         2,
                                                                     )
 
-                                                                    block += TUPLE4
+                                                                    block += (
+                                                                        TUPLE4
+                                                                    )
 
                                                                     b = 0
 
                                                                     E3 = ""
 
-                                                                    while b < E5 - 1:
+                                                                    while (
+                                                                        b
+                                                                        < E5 - 1
+                                                                    ):
 
                                                                         E3 += E2
 
@@ -1090,15 +1202,21 @@ class compression:
                                                                     TUPLE1 = TUPLE1[
                                                                         block:
                                                                     ]
-                                                                    E1*=8
+                                                                    E1 *= 8
 
                                                                     TUPLE1 = (
-                                                                        TUPLE1[:E1]
+                                                                        TUPLE1[
+                                                                            :E1
+                                                                        ]
                                                                         + E3
-                                                                        + TUPLE1[E1:]
+                                                                        + TUPLE1[
+                                                                            E1:
+                                                                        ]
                                                                     )
 
-                                                                    block += long_F
+                                                                    block += (
+                                                                        long_F
+                                                                    )
 
                                                                 elif E == "1":
 
@@ -1106,7 +1224,10 @@ class compression:
 
                                                                     Z7 = 1
 
-                                                                    if cut_b == 0:
+                                                                    if (
+                                                                        cut_b
+                                                                        == 0
+                                                                    ):
 
                                                                         TUPLE1 = TUPLE1[
                                                                             block:
@@ -1114,7 +1235,9 @@ class compression:
 
                                                                         block += long_F
 
-                                                                        cut_b = 1
+                                                                        cut_b = (
+                                                                            1
+                                                                        )
 
                                                                         # print(CB)
 
@@ -1153,13 +1276,27 @@ class compression:
 
                                                                 Extract1 = 1
 
-                                                                if Check == TUPLE:
-                                                                    File_information5_17 = Check2
-                                                                    if Check2[:8]=="00000000":
-                                                                    	File_information5_17=Check2[8:]
-                                                        		
+                                                                if (
+                                                                    Check
+                                                                    == TUPLE
+                                                                ):
+                                                                    File_information5_17 = (
+                                                                        Check2
+                                                                    )
+                                                                    if (
+                                                                        Check2[
+                                                                            :8
+                                                                        ]
+                                                                        == "00000000"
+                                                                    ):
+                                                                        File_information5_17 = Check2[
+                                                                            8:
+                                                                        ]
 
-                                                                if Check != TUPLE:
+                                                                if (
+                                                                    Check
+                                                                    != TUPLE
+                                                                ):
 
                                                                     Ex = (
                                                                         "00000000"
@@ -1180,14 +1317,16 @@ class compression:
                                                                     return elapsed_time
 
                                 if Extract1 == 1:
-                                	n = int(File_information5_17, 2)
-                                	width_bits = "%0{}x".format((len(File_information5_17) // 8) * 2)
-                                	jl = binascii.unhexlify(width_bits % n)
-                                	with open(f"{name}.b", "wb") as f2:
-                                		f2.write(jl)
-                                	x3 = time() - x
-                                	print(f"Speed bits: {long_11 / x3:.5f}")
-                                	return str(float(x3))
+                                    n = int(File_information5_17, 2)
+                                    width_bits = "%0{}x".format(
+                                        (len(File_information5_17) // 8) * 2
+                                    )
+                                    jl = binascii.unhexlify(width_bits % n)
+                                    with open(f"{name}.b", "wb") as f2:
+                                        f2.write(jl)
+                                    x3 = time() - x
+                                    print(f"Speed bits: {long_11 / x3:.5f}")
+                                    return str(float(x3))
 
                         if i == 2:
 
@@ -1219,7 +1358,9 @@ class compression:
 
                                         width_bits = "%0" + width_bits + "x"
 
-                                        width_bits3 = binascii.unhexlify(width_bits % n)
+                                        width_bits3 = binascii.unhexlify(
+                                            width_bits % n
+                                        )
 
                                         width_bits2 = len(width_bits3)
 
@@ -1261,7 +1402,9 @@ class compression:
 
                                         if File_information5[:1] == "1":
 
-                                            File_information5 = File_information5[1:]
+                                            File_information5 = (
+                                                File_information5[1:]
+                                            )
 
                                     INFO = File_information5
 
@@ -1317,7 +1460,9 @@ class compression:
 
                                                 block += 3
 
-                                                OC = INFO[block : block + En - 2]
+                                                OC = INFO[
+                                                    block : block + En - 2
+                                                ]
 
                                                 if len(OC) == 0:
 
@@ -1384,14 +1529,17 @@ class compression:
 
                                                 if En <= (8192 * 4) - 1:
 
-                                                    OCl = INFO[block : block + SEN]
+                                                    OCl = INFO[
+                                                        block : block + SEN
+                                                    ]
 
                                                     SiZeros_ones = int(OCl, 2)
 
                                                     block += SEN
 
                                                 EB = INFO[
-                                                    block : block + (En - SiZeros_ones)
+                                                    block : block
+                                                    + (En - SiZeros_ones)
                                                 ]
 
                                                 S = len(EB)
@@ -1462,9 +1610,11 @@ class compression:
 
                                             TUPLE += ZEROS_ONE_1
 
-                                        elif C9 == 1 and (long_L - (En-2) )>= 0:
+                                        elif (
+                                            C9 == 1 and (long_L - (En - 2)) >= 0
+                                        ):
 
-                                            TUPLE = TUPLE[: long_L-(En-2)]
+                                            TUPLE = TUPLE[: long_L - (En - 2)]
 
                                             TUPLE += ZEROS_ONE_1
 
@@ -1491,7 +1641,6 @@ class compression:
                                             cut_b = 0
 
                                             long_F = len(TUPLE)
-                                            
 
                                             while block < long_F:
 
@@ -1507,7 +1656,9 @@ class compression:
 
                                                     block += 8
 
-                                                    E3 = int(Z[block : block + 5], 2)
+                                                    E3 = int(
+                                                        Z[block : block + 5], 2
+                                                    )
 
                                                     block += 5
 
@@ -1517,7 +1668,9 @@ class compression:
 
                                                         Extract1 = 0
 
-                                                        File_information5_17 = Ex
+                                                        File_information5_17 = (
+                                                            Ex
+                                                        )
 
                                                         elapsed_time = process_file(
                                                             Extract1=1,
@@ -1528,7 +1681,9 @@ class compression:
 
                                                         return elapsed_time
 
-                                                    E1 = int(Z[block : block + E3], 2)
+                                                    E1 = int(
+                                                        Z[block : block + E3], 2
+                                                    )
 
                                                     block += E3
 
@@ -1539,7 +1694,11 @@ class compression:
                                                     block += 5
 
                                                     E5 = int(
-                                                        Z[block : block + TUPLE4], 2
+                                                        Z[
+                                                            block : block
+                                                            + TUPLE4
+                                                        ],
+                                                        2,
                                                     )
 
                                                     block += TUPLE4
@@ -1557,10 +1716,12 @@ class compression:
                                                         # print(E2)
 
                                                     TUPLE1 = TUPLE1[block:]
-                                                    E1*=8
+                                                    E1 *= 8
 
                                                     TUPLE1 = (
-                                                        TUPLE1[:E1] + E3 + TUPLE1[E1:]
+                                                        TUPLE1[:E1]
+                                                        + E3
+                                                        + TUPLE1[E1:]
                                                     )
 
                                                     block += long_F
@@ -1615,7 +1776,9 @@ class compression:
 
                                                 File_information5_17 = TUPLE
 
-                                                long_1 = len(File_information5_17)
+                                                long_1 = len(
+                                                    File_information5_17
+                                                )
 
                                                 add_bits = ""
 
@@ -1627,7 +1790,9 @@ class compression:
 
                                                     while z < count_bits:
 
-                                                        add_bits = "0" + add_bits
+                                                        add_bits = (
+                                                            "0" + add_bits
+                                                        )
 
                                                         z = z + 1
 
@@ -1636,19 +1801,41 @@ class compression:
                                                 )
 
                                                 if Extract1 == 1:
-                                                	L = len(File_information5_17)
-                                                	n = int(File_information5_17, 2)
-                                                	width_bits = "%0" + str((L // 8) * 2) + "x"
-                                                	width_bits3 = binascii.unhexlify(width_bits % n)
-                                                	width_bits2 = len(width_bits3)
-                                                	name2 = name[:-2]
-                                                	start_time = time()
-                                                	with open(name2, "wb") as f2:
-                                                		f2.write(width_bits3)
-                                                	elapsed_time = time() - start_time
-                                                	speed_bits = (long_11 * 8) / float(elapsed_time)
-                                                	print(f"Speed bits: {speed_bits:.5f}")
-                                                	return str(elapsed_time)
+                                                    L = len(
+                                                        File_information5_17
+                                                    )
+                                                    n = int(
+                                                        File_information5_17, 2
+                                                    )
+                                                    width_bits = (
+                                                        "%0"
+                                                        + str((L // 8) * 2)
+                                                        + "x"
+                                                    )
+                                                    width_bits3 = (
+                                                        binascii.unhexlify(
+                                                            width_bits % n
+                                                        )
+                                                    )
+                                                    width_bits2 = len(
+                                                        width_bits3
+                                                    )
+                                                    name2 = name[:-2]
+                                                    start_time = time()
+                                                    with open(
+                                                        name2, "wb"
+                                                    ) as f2:
+                                                        f2.write(width_bits3)
+                                                    elapsed_time = (
+                                                        time() - start_time
+                                                    )
+                                                    speed_bits = (
+                                                        long_11 * 8
+                                                    ) / float(elapsed_time)
+                                                    print(
+                                                        f"Speed bits: {speed_bits:.5f}"
+                                                    )
+                                                    return str(elapsed_time)
 
 
 d = compression()
