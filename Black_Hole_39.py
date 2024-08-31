@@ -956,11 +956,11 @@ class compression:
 
                                                         elif (
                                                             C9 == 1
-                                                            and (long_L - 2 - En) >= 0
+                                                            and (long_L -(En-2)) >= 0
                                                         ):
 
                                                             TUPLE = TUPLE[
-                                                                : long_L - 2 - En
+                                                                : long_L - (En-2)
                                                             ]
 
                                                             TUPLE += ZEROS_ONE_1
@@ -1180,46 +1180,14 @@ class compression:
                                                                     return elapsed_time
 
                                 if Extract1 == 1:
-
-                                    L = len(File_information5_17)
-
-                                    # print(L)
-
-                                    n = int(File_information5_17, 2)
-
-                                    width_bits = len(File_information5_17)
-
-                                    width_bits = (width_bits // 8) * 2
-
-                                    width_bits = str(width_bits)
-
-                                    width_bits = "%0" + width_bits + "x"
-
-                                    width_bits3 = binascii.unhexlify(width_bits % n)
-
-                                    width_bits2 = len(width_bits3)
-
-                                    File_information5_2 = Clear
-
-                                    jl = width_bits3
-
-                                    name1 = name + ".b"
-
-                                    with open(name1, "wb") as f2:
-
-                                        f2.write(jl)
-
-                                    x2 = time()
-
-                                    x3 = x2 - x
-
-                                    print(f"Speed bits: {(long_11) / x3:.5f}")
-
-                                    xs = float(x3)
-
-                                    xs = str(xs)
-
-                                    return xs
+                                	n = int(File_information5_17, 2)
+                                	width_bits = "%0{}x".format((len(File_information5_17) // 8) * 2)
+                                	jl = binascii.unhexlify(width_bits % n)
+                                	with open(f"{name}.b", "wb") as f2:
+                                		f2.write(jl)
+                                	x3 = time() - x
+                                	print(f"Speed bits: {long_11 / x3:.5f}")
+                                	return str(float(x3))
 
                         if i == 2:
 
@@ -1494,9 +1462,9 @@ class compression:
 
                                             TUPLE += ZEROS_ONE_1
 
-                                        elif C9 == 1 and (long_L - 2 - En) >= 0:
+                                        elif C9 == 1 and (long_L - (En-2) )>= 0:
 
-                                            TUPLE = TUPLE[: long_L - 2 - En]
+                                            TUPLE = TUPLE[: long_L-(En-2)]
 
                                             TUPLE += ZEROS_ONE_1
 
@@ -1668,52 +1636,19 @@ class compression:
                                                 )
 
                                                 if Extract1 == 1:
-
-                                                    L = len(File_information5_17)
-
-                                                    n = int(File_information5_17, 2)
-
-                                                    width_bits = len(
-                                                        File_information5_17
-                                                    )
-
-                                                    width_bits = (width_bits // 8) * 2
-
-                                                    width_bits = str(width_bits)
-
-                                                    width_bits = "%0" + width_bits + "x"
-
-                                                    width_bits3 = binascii.unhexlify(
-                                                        width_bits % n
-                                                    )
-
-                                                    width_bits2 = len(width_bits3)
-
-                                                    File_information5_2 = Clear
-
-                                                    jl = width_bits3
-
-                                                    long = len(name)
-
-                                                    name2 = name[: long - 2]
-
-                                                    with open(name2, "wb") as f2:
-
-                                                        f2.write(width_bits3)
-
-                                                    x2 = time()
-
-                                                    x3 = x2 - x
-
-                                                    xs = float(x3)
-
-                                                    print(
-                                                        f"Speed bits: {(long_11 * 8) / x3:.5f}"
-                                                    )
-
-                                                    xs = str(xs)
-
-                                                    return xs
+                                                	L = len(File_information5_17)
+                                                	n = int(File_information5_17, 2)
+                                                	width_bits = "%0" + str((L // 8) * 2) + "x"
+                                                	width_bits3 = binascii.unhexlify(width_bits % n)
+                                                	width_bits2 = len(width_bits3)
+                                                	name2 = name[:-2]
+                                                	start_time = time()
+                                                	with open(name2, "wb") as f2:
+                                                		f2.write(width_bits3)
+                                                	elapsed_time = time() - start_time
+                                                	speed_bits = (long_11 * 8) / float(elapsed_time)
+                                                	print(f"Speed bits: {speed_bits:.5f}")
+                                                	return str(elapsed_time)
 
 
 d = compression()
