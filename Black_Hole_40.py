@@ -308,8 +308,6 @@ class compression:
                                 Z7 = 0
 
                                 CZ = 0
-                                IC=I8
-                                IFOS=INFO
 
                                 if Circle_times == 0:
 
@@ -320,110 +318,88 @@ class compression:
                                 if Circle_times == 0:
 
                                     SINFO = INFO
-                                    
-                                tsr=2
-                                long_size_after_RLE=len(I8)
-                                long_size_before_RLE=len(I8)
-                                while tsr!=31:
-                                    I8=IC
-
-                                    tsr+=1
-                                    #print(tsr)
-
-                                
-                                    
-                                    long_F = len(I8)
+                              
+                                R = int(input("Please, enter number of reapeats? "))
 
 
-                                    if I8[long_F-8]!="00000000":
-                                        I8+="00000000"
-                                    else:
-                                            I8+="11111111"
+                                if I8[long_F-8]!="00000000":
+                                    I8+="00000000"
+                                else:
+                                	I8+="11111111"
 
-                                    while block < long_F+8:
+                                while block < long_F+8:
 
-                                        IF = I8[block : block + 8]
+                                    IF = I8[block : block + 8]
 
-                                        if FC == 0:
+                                    if FC == 0:
 
-                                            IF1 = I8[block + 8 : block + 16]
+                                        IF1 = I8[block + 8 : block + 16]
 
-                                        W4 += IF
+                                    W4 += IF
 
-                                        block += 8
+                                    block += 8
 
-                                        if IF1 == IF:
+                                    if IF1 == IF:
 
-                                            # print(IF1)
+                                        # print(IF1)
 
-                                            # print(IF2)
+                                        # print(IF2)
 
-                                            FC += 1
+                                        FC += 1
 
-                                            # print(FC)
+                                        # print(FC)
 
-                                            if FC == 1:
+                                        if FC == 1:
 
-                                                W = block - 8
+                                            W = block - 8
 
-                                        if IF1 != IF:
+                                    if IF1 != IF:
 
-                                            if FC < tsr:
+                                        if FC < R:
+
+                                            FC = 0
+
+                                        if Z7 == 0:
+
+                                            if FC >= R:
+
+                                                Z7 = 1
+
+                                                CZ = 1
+
+                                                W1 = block - 16
+
+                                                Sw1 = format(W//8, '01b')
+
+                                                Sw3 = format(len(Sw1), '05b')
+
+                                                # print(FC)
+
+                                                Sw2 = format(FC, '01b')
+
+                                                Sw4 = format(len(Sw2), '05b')
+
+                                                W3 += "0" + IF1 + Sw3 + Sw1 + Sw4 + Sw2
+
+                                                W4 = W4[:W] + W4[W1:]
 
                                                 FC = 0
 
-                                            if Z7 == 0:
+                                if CZ == 0:
 
-                                                if FC >= tsr:
+                                    W5 = W3 + "1"
 
-                                                    Z7 = 1
+                                elif CZ == 1:
 
-                                                    CZ = 1
+                                    W5 = W3
 
-                                                    W1 = block - 16
+                                W4 = W5 + W4
 
-                                                    Sw1 = format(W//8, '01b')
-
-                                                    Sw3 = format(len(Sw1), '05b')
-
-                                                    # print(FC)
-
-                                                    Sw2 = format(FC, '01b')
-
-                                                    Sw4 = format(len(Sw2), '05b')
-
-                                                    W3 += "0" + IF1 + Sw3 + Sw1 + Sw4 + Sw2
-
-                                                    W4 = W4[:W] + W4[W1:]
-
-                                                    FC = 0
-
-                                    if CZ == 0:
-
-                                        W5 = W3 + "1"
-
-                                    elif CZ == 1:
-
-                                        W5 = W3
-
-                                    W4 = W5 + W4
-
-                                    INFO = W4
-                                    W4=""
-                                    W5=""
-                                    long_F = len(INFO)
-                                    INFO=INFO[:long_F-8]
-                                    long_size_after_RLE=len(INFO)
-                                    
-                                    if long_size_before_RLE<=long_size_after_RLE  or tsr==3:
-                                        
-                                        
-                                        INFO_S=INFO
-                                        
-                                        
+                                INFO = W4
+                                long_F = len(INFO)
+                                INFO=INFO[:long_F-8]
 
                                 # print(len(INFO))
-                                INFO=INFO_S
 
                                 while Find != 1:
 
